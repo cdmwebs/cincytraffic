@@ -1,2 +1,4 @@
+#= require models/camera.js
+
 $ ->
-  alert 'woop!'
+  alert 'woop woop!'

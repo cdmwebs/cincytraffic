@@ -4,4 +4,6 @@ Artimis::Application.routes.draw do
       resources :cameras
     end
   end
+
+  root :to => 'cameras#index'
 end
