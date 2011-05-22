@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0.rc1'
-gem 'mongoid'
+gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
 gem 'bson_ext'
 gem 'geocoder'
 
