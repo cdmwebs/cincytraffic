@@ -5,6 +5,13 @@ ddoc =
   _id:'_design/app'
   rewrites: [
     {from:"/", to:'index.html'}
+    {
+      from:"/collection/:type",
+      to: '_view/collection',
+      query:
+        start_key: [":type"]
+        end_key: [":type", {}]
+    }
     {from:"/api", to:'../../'}
     {from:"/api/*", to:'../../*'}
     {from:"/*", to:'*'} ]
@@ -12,6 +19,10 @@ ddoc =
 ddoc.views =
   byName:
     map: (doc) -> emit(doc.name, null) if doc.name?
+  all:
+    map: (doc) -> emit(doc.name, null)
+  collection:
+    map: (doc) -> emit([doc.type, doc._id], null)
 
 ddoc.validate_doc_update = (newDoc, oldDoc, userCtx) ->
   if (newDoc._deleted == true && userCtx.roles.indexOf('_admin') == -1)
