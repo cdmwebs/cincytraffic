@@ -1,0 +1,15 @@
+{
+  "author": "Chris Moore <cdmwebs@gmail.com>",
+  "name": "cincytraffic",
+  "description": "Look at cameras on a map.",
+  "version": "0.0.1",
+  "repository": {
+    "url": ""
+  },
+  "engines": {
+    "node": "~v0.4.11"
+  },
+  "dependencies": {
+    "couchapp": ""
+  }
+}
