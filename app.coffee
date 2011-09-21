@@ -9,7 +9,9 @@ ddoc =
     {from:"/api/*", to:'../../*'}
     {from:"/*", to:'*'} ]
 
-ddoc.views = {}
+ddoc.views =
+  byName:
+    map: (doc) -> emit(doc.name, null) if doc.name?
 
 ddoc.validate_doc_update = (newDoc, oldDoc, userCtx) ->
   if (newDoc._deleted == true && userCtx.roles.indexOf('_admin') == -1)
