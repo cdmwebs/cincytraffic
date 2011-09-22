@@ -4,7 +4,6 @@ path = require('path')
 ddoc =
   _id:'_design/app'
   rewrites: [
-    {from:"/", to:'index.html'}
     {
       from:"/collection/:type",
       to: '_view/collection',
@@ -12,6 +11,13 @@ ddoc =
         start_key: [":type"]
         end_key: [":type", {}]
     }
+    {
+      from: "/collection/:type/:id",
+      to: "_view/collection",
+      query:
+        key: [ ":type", ":id" ]
+    }
+    {from:"/", to:'index.html'}
     {from:"/api", to:'../../'}
     {from:"/api/*", to:'../../*'}
     {from:"/*", to:'*'} ]
@@ -22,7 +28,7 @@ ddoc.views =
   all:
     map: (doc) -> emit(doc.name, null)
   collection:
-    map: (doc) -> emit([doc.type, doc._id], null)
+    map: (doc) -> emit([doc.type, doc._id], doc)
 
 ddoc.validate_doc_update = (newDoc, oldDoc, userCtx) ->
   if (newDoc._deleted == true && userCtx.roles.indexOf('_admin') == -1)

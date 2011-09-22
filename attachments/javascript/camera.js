@@ -24,6 +24,9 @@
       longitude: null
     };
     Camera.prototype.idAttribute = '_id';
+    Camera.prototype.hasGeo = function() {
+      return (this.get('latitude') != null) || (this.get('longitude') != null);
+    };
     return Camera;
   })();
   root.Cameras = (function() {
@@ -32,17 +35,7 @@
       Cameras.__super__.constructor.apply(this, arguments);
     }
     Cameras.prototype.model = root.Camera;
-    Cameras.prototype.url = "/cincytraffic/_design/app/_rewrite/collection/camera?include_docs=true";
-    Cameras.prototype.parse = function(response) {
-      var cameras, row, _i, _len, _ref;
-      cameras = [];
-      _ref = response.rows;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        row = _ref[_i];
-        cameras.push(row.doc);
-      }
-      return cameras;
-    };
+    Cameras.prototype.url = "/collection/camera";
     return Cameras;
   })();
 }).call(this);

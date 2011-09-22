@@ -12,11 +12,9 @@ class root.Camera extends Backbone.Model
 
   idAttribute: '_id'
 
+  hasGeo: ->
+    @get('latitude')? or @get('longitude')?
+
 class root.Cameras extends Backbone.Collection
   model: root.Camera
-  url: "/cincytraffic/_design/app/_rewrite/collection/camera?include_docs=true"
-  parse: (response) ->
-    cameras = []
-    for row in response.rows
-      cameras.push(row.doc)
-    cameras
+  url: "/collection/camera"
